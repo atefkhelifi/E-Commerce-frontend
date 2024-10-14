@@ -1,0 +1,160 @@
+<p-toast></p-toast>
+<div class="admin-page">
+  <p-card
+    [header]="editMode ? 'Edit user' : 'Add user'"
+    subheader="You can add or edit users here"
+  >
+    <div class="p-grid mb-5">
+      <div class="p-col-12">
+        <p-toolbar>
+          <div class="p-toolbar-group-right"></div>
+          <div class="p-toolbar-group-left">
+            <p-button
+              [label]="editMode ? 'Update' : 'Create'"
+              icon="pi pi-plus"
+              styleClass="p-button-primary mr-2"
+              (onClick)="onSubmit()"
+            />
+            <p-button
+              label="Cancle"
+              icon="pi pi-arrow-circle-left"
+              styleClass="p-button-secondary"
+              (onClick)="onCancle()"
+            />
+          </div>
+        </p-toolbar>
+      </div>
+    </div>
+    <div class="grid">
+      <div class="col-12">
+        <form [formGroup]="form">
+          <div class="formgrid grid">
+            <div class="field col">
+              <label for="name">Name</label>
+              <input
+                id="name"
+                type="text"
+                formControlName="name"
+                class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
+              />
+              <small
+                *ngIf="form.controls['name'].invalid && isSubmitted"
+                class="p-error"
+                >Name is required</small
+              >
+            </div>
+            <div class="field col">
+              <label for="email">Email</label>
+              <input
+                id="email"
+                type="text"
+                formControlName="email"
+                class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
+              />
+              <small
+                *ngIf="form.controls['email'].invalid && isSubmitted"
+                class="p-error"
+              >
+                <span *ngIf="form.controls['email']?.errors?.['required']"
+                  >Email is required</span
+                >
+                <span *ngIf="form.controls['email']?.errors?.['email']"
+                  >Email is invalid</span
+                >
+              </small>
+            </div>
+            <div class="field col">
+              <label for="password">Password</label>
+              <input
+                id="password"
+                type="password"
+                formControlName="password"
+                class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
+              />
+              <small
+                *ngIf="form.controls['password'].invalid && isSubmitted"
+                class="p-error"
+                >Password is required</small
+              >
+            </div>
+          </div>
+          <div class="formgrid grid">
+            <div class="field col-4">
+              <label for="phone">Phone</label><br />
+              <p-inputMask
+                mask="(999) 999-9999"
+                formControlName="phone"
+                placeholder="(999) 999-9999"
+                styleClass="w-full"
+              ></p-inputMask>
+
+              <small
+                *ngIf="form.controls['phone'].invalid && isSubmitted"
+                class="p-error"
+                >Phone is required</small
+              >
+            </div>
+            <div class="field col-4">
+              <label for="isAdmin">Is Admin</label><br />
+              <p-inputSwitch formControlName="isAdmin" />
+            </div>
+          </div>
+          <div class="formgrid grid">
+            <div class="field col">
+              <label for="street">Street</label>
+              <input
+                id="street"
+                type="text"
+                formControlName="street"
+                class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
+              />
+            </div>
+            <div class="field col">
+              <label for="apartment">Apartment</label>
+              <input
+                id="apartment"
+                type="text"
+                formControlName="apartment"
+                class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
+              />
+            </div>
+            <div class="field col">
+              <label for="zip">Zip</label>
+              <input
+                id="zip"
+                type="text"
+                formControlName="zip"
+                class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
+              />
+            </div>
+          </div>
+          <div class="formgrid grid">
+            <div class="field col-4">
+              <label for="city">City</label>
+              <input
+                id="city"
+                type="text"
+                formControlName="city"
+                class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
+              />
+            </div>
+            <div class="field col-4">
+              <label for="country">Country</label><br />
+              <p-dropdown
+                [options]="countries"
+                formControlName="country"
+                optionLabel="name"
+                optionValue="id"
+                [filter]="true"
+                filterBy="name"
+                [showClear]="true"
+                styleClass="w-full"
+                placeholder="Select a Country"
+              ></p-dropdown>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </p-card>
+</div>

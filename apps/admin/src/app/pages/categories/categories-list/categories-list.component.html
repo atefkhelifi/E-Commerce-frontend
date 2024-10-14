@@ -1,0 +1,69 @@
+<p-toast />
+<p-confirmDialog />
+
+<div class="admin-page">
+  <p-card header="Categories" subheader="List of all categories">
+    <div class="p-grid">
+      <div class="p-col-12">
+        <p-toolbar>
+          <div class="p-toolbar-group-left">
+            <p-button
+              label="New"
+              icon="pi pi-plus"
+              styleClass="p-button-success"
+              routerLink="form"
+            />
+          </div>
+        </p-toolbar>
+      </div>
+    </div>
+    <div class="p-col-12">
+      <p-table
+        [value]="categories"
+        styleClass="p-datatable-gridlines"
+        [tableStyle]="{ 'min-width': '50rem' }"
+      >
+        <ng-template pTemplate="header">
+          <tr>
+            <th pSortableColumn="name" style="width: 20%">
+              Name <p-sortIcon field="name" />
+            </th>
+            <th>Icon</th>
+            <th>Color</th>
+            <th></th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-category>
+          <tr>
+            <td>{{ category.name }}</td>
+            <td>
+              <i
+                style="font-size: 2rem"
+                class="pi"
+                [ngClass]="'pi-' + category.icon"
+              ></i>
+            </td>
+            <td>
+              <span
+                class="dot"
+                [ngStyle]="{ 'background-color': category.color }"
+              ></span>
+            </td>
+            <td>
+              <p-button
+                icon="pi pi-trash"
+                styleClass="p-button-danger mr-2"
+                (onClick)="deleteCategory(category.id)"
+              />
+              <p-button
+                icon="pi pi-pencil"
+                styleClass="p-button-success"
+                (onClick)="updateCategory(category.id)"
+              />
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </p-card>
+</div>

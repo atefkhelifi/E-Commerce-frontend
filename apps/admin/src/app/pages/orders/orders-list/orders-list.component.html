@@ -1,0 +1,60 @@
+<p-toast />
+<p-confirmDialog />
+
+<div class="admin-page">
+  <p-card header="Orders" subheader="List of all orders">
+    <div class="p-col-12">
+      <p-table
+        [value]="orders"
+        styleClass="p-datatable-gridlines"
+        [tableStyle]="{ 'min-width': '50rem' }"
+      >
+        <ng-template pTemplate="header">
+          <tr>
+            <th pSortableColumn="user.name">
+              User <p-sortIcon field="user.name" />
+            </th>
+            <th pSortableColumn="totalPrice">
+              Total price<p-sortIcon field="totalPrice" />
+            </th>
+            <th pSortableColumn="dateOrdered">
+              Date ordered<p-sortIcon field="dateOrdered" />
+            </th>
+            <th>Status</th>
+            <th></th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-order>
+          <tr>
+            <td>{{ order.user.name }}</td>
+            <td>
+              {{ order.totalPrice }}
+            </td>
+            <td>
+              {{ order.dateOrdered | date : 'short' }}
+            </td>
+            <td>
+              <p-tag
+                [value]="orderStatus[order.status].label"
+                [severity]="orderStatus[order.status].color"
+              />
+            </td>
+
+            <td>
+              <p-button
+                icon="pi pi-trash"
+                styleClass="p-button-danger mr-2"
+                (onClick)="deleteOrder(order.id)"
+              />
+              <p-button
+                icon="pi pi-pencil"
+                styleClass="p-button-success"
+                (onClick)="showOrder(order.id)"
+              />
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </p-card>
+</div>
