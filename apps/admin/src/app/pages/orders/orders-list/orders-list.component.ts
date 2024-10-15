@@ -13,29 +13,7 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { OrdersService, Order } from '@frontend/orders';
 import { TagModule } from 'primeng/tag';
 
-const ORDER_STATUS = {
-  0: {
-    label: 'Pending',
-    color: 'primary',
-  },
-  1: {
-    label: 'Processed',
-    color: 'warning',
-  },
-  2: {
-    label: 'Shipped',
-    color: 'warning',
-  },
-  3: {
-    label: 'Delivered',
-    color: 'success',
-  },
-  4: {
-    label: 'Failed',
-    color: 'danger',
-  },
-};
-
+import { ORDER_STATUS } from '../order.constatnts';
 @Component({
   selector: 'admin-orders-list',
   standalone: true,
@@ -108,6 +86,6 @@ export class OrdersListComponent implements OnInit {
     });
   }
   showOrder(orderId: string) {
-    this.router.navigateByUrl(`categories/form/${orderId}`);
+    this.router.navigateByUrl(`orders/${orderId}`);
   }
 }

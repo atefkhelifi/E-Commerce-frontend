@@ -15,12 +15,15 @@ export class OrdersService {
   getOrders(): Observable<Order[]> {
     return this.http.get<Order[]>(this.apiUrlOrders);
   }
-  getOrderId(orderId: string): Observable<Order> {
+  getOrder(orderId: string): Observable<Order> {
     return this.http.get<Order>(this.apiUrlOrders + `/${orderId}`);
   }
 
-  updateOrder(order: Order): Observable<Order> {
-    return this.http.put<Order>(this.apiUrlOrders + '/' + order.id, order);
+  updateOrder(
+    orderId: string,
+    orderStatus: { status: string }
+  ): Observable<Order> {
+    return this.http.put<Order>(this.apiUrlOrders + '/' + orderId, orderStatus);
   }
   deleteOrder(orderId: string): Observable<any> {
     return this.http.delete<any>(this.apiUrlOrders + `/${orderId}`);
