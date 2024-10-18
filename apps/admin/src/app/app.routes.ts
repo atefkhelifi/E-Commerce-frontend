@@ -9,11 +9,15 @@ import { UsersListComponent } from './pages/users/users-list/users-list.componen
 import { UsersFormComponent } from './pages/users/users-form/users-form.component';
 import { OrdersListComponent } from './pages/orders/orders-list/orders-list.component';
 import { OrdersDetailComponent } from './pages/orders/orders-detail/orders-detail.component';
+// eslint-disable-next-line @nx/enforce-module-boundaries
+import { AuthGuard, usersRoutes } from '@frontend/users';
 
 export const appRoutes: Route[] = [
+  ...usersRoutes,
   {
     path: '',
     component: ShellComponent,
+    canActivate: [AuthGuard],
     children: [
       {
         path: 'dashboard',
