@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { Order } from '../models/order';
 // eslint-disable-next-line @nx/enforce-module-boundaries
 import { environment } from '@env/environment.development';
@@ -27,5 +27,16 @@ export class OrdersService {
   }
   deleteOrder(orderId: string): Observable<any> {
     return this.http.delete<any>(this.apiUrlOrders + `/${orderId}`);
+  }
+  getOrdersCount(): Observable<number> {
+    return this.http
+      .get<number>(`${this.apiUrlOrders}/get/count`)
+      .pipe(map((objectValue: any) => objectValue.orderCount));
+  }
+
+  getTotalSales(): Observable<number> {
+    return this.http
+      .get<number>(`${this.apiUrlOrders}/get/totalsales`)
+      .pipe(map((objectValue: any) => objectValue.totalSales));
   }
 }

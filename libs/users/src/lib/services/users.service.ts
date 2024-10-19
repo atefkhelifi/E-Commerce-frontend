@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 // eslint-disable-next-line @nx/enforce-module-boundaries
 import { environment } from '@env/environment.development';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { User } from '../models/user';
 
 @Injectable({
@@ -26,5 +26,10 @@ export class UsersService {
   }
   deleteUser(userId: string): Observable<any> {
     return this.http.delete<any>(this.apiUrlUsers + `/${userId}`);
+  }
+  getUsersCount(): Observable<number> {
+    return this.http
+      .get<number>(`${this.apiUrlUsers}/get/count`)
+      .pipe(map((objectValue: any) => objectValue.userCount));
   }
 }
