@@ -4,6 +4,7 @@
   "projectType": "application",
   "prefix": "app",
   "sourceRoot": "apps/ngShop/src",
+
   "tags": [],
   "targets": {
     "build": {
@@ -20,6 +21,10 @@
           {
             "glob": "**/*",
             "input": "apps/ngShop/public"
+          },
+          {
+            "glob": "**/*",
+            "input": "apps/ngShop/src"
           }
         ],
         "styles": ["apps/ngShop/src/styles.scss"],

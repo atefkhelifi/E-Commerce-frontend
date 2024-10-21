@@ -20,12 +20,12 @@ export const appRoutes: Route[] = [
     canActivate: [AuthGuard],
     children: [
       {
-        path: '',
-        component: DashboardComponent,
-      },
-      {
         path: 'categories',
         component: CategoriesListComponent,
+      },
+      {
+        path: '',
+        component: DashboardComponent,
       },
       {
         path: 'categories/form',

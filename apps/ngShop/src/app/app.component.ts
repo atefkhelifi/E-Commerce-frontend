@@ -4,7 +4,7 @@ import { NxWelcomeComponent } from './nx-welcome.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { HeaderComponent } from './shared/header/header.component';
-import { BannerComponent } from 'libs/ui/src/lib/banner/banner.component';
+import { BannerComponent } from '@frontend/ui';
 
 @Component({
   standalone: true,
@@ -17,7 +17,7 @@ import { BannerComponent } from 'libs/ui/src/lib/banner/banner.component';
     HeaderComponent,
     BannerComponent,
   ],
-  selector: 'app-root',
+  selector: 'ngshop-root',
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })

@@ -3,6 +3,7 @@ import { RouterModule } from '@angular/router';
 import { NxWelcomeComponent } from './nx-welcome.component';
 // eslint-disable-next-line @nx/enforce-module-boundaries
 import { LoginComponent, UsersComponent } from '@frontend/users';
+import { appRoutes } from './app.routes';
 
 @Component({
   standalone: true,

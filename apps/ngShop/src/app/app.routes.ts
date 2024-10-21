@@ -5,4 +5,9 @@ import { ProductListComponent } from './pages/product-list/product-list.componen
 export const appRoutes: Route[] = [
   { path: '', component: HomePageComponent },
   { path: 'products', component: ProductListComponent },
+  {
+    path: '**',
+    redirectTo: '',
+    pathMatch: 'full',
+  },
 ];
