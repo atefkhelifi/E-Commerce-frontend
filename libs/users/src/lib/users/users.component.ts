@@ -9,7 +9,7 @@ const routes: Routes = [
 @Component({
   selector: 'users-users',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule],
   templateUrl: './users.component.html',
   styleUrl: './users.component.scss',
 })

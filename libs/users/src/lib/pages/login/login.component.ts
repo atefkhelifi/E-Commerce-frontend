@@ -21,7 +21,6 @@ import { LocalStorageService } from '../../services/local-storage.service';
   standalone: true,
   imports: [
     CommonModule,
-    RouterModule,
     InputGroupModule,
     InputGroupAddonModule,
     InputTextModule,

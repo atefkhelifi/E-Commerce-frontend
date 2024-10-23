@@ -4,7 +4,7 @@ import { ButtonModule } from 'primeng/button';
 import { AccordionModule } from 'primeng/accordion';
 
 @Component({
-  selector: 'app-product-list',
+  selector: 'ngshop-product-list',
   standalone: true,
   imports: [ButtonModule, CommonModule, AccordionModule],
   templateUrl: './product-list.component.html',
