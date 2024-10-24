@@ -1,4 +1,6 @@
-.banner {
+@import '../../../../../styles/ngShop.scss';
+
+::ng-deep .banner {
   height: 280px;
   width: 100%;
   background-color: #d7effb;
@@ -16,5 +18,21 @@
     margin: 0;
     font-size: 2em;
     font-weight: 400;
+  }
+  &-image {
+    text-align: right;
+    padding: 15px 50px 0 0;
+  }
+  &-button {
+    background-color: var(--surface-0);
+    color: $primary-color;
+    border: 0;
+    border-radius: 13px;
+    height: 50px;
+    &:enabled:hover {
+      background-color: var(--surface-0);
+      color: $primary-color;
+      border: 0;
+    }
   }
 }

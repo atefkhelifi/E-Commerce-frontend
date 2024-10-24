@@ -6,6 +6,20 @@
   "projectType": "library",
   "tags": [],
   "targets": {
+    "build": {
+      "options": {
+        "assets": [
+          {
+            "glob": "**/*",
+            "input": "apps/admin/public"
+          },
+          {
+            "glob": "**/*",
+            "input": "apps/admin/src"
+          }
+        ]
+      }
+    },
     "test": {
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],

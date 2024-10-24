@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { BannerComponent } from '../../../../../../libs/ui/src/lib/banner/banner.component';
+import { BannerComponent } from '@frontend/ui';
+import { CategoriesBannerComponent } from '@frontend/products';
 
 @Component({
   selector: 'ngshop-home-page',
   standalone: true,
-  imports: [CommonModule, BannerComponent],
+  imports: [CommonModule, BannerComponent, CategoriesBannerComponent],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.scss',
 })
