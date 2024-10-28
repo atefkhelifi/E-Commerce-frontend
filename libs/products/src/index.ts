@@ -5,3 +5,4 @@ export * from './lib/models/category';
 export * from './lib/models/product';
 export * from './lib/components/products-search/products-search.component';
 export * from './lib/components/categories-banner/categories-banner.component';
+export * from './lib/components/featured-products/featured-products.component';
