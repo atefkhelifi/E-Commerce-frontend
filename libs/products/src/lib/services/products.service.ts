@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
 // eslint-disable-next-line @nx/enforce-module-boundaries
 import { environment } from '@env/environment.development';
@@ -12,8 +12,12 @@ export class ProductsService {
   apiUrlProducts = environment.apiUrl + 'products';
   constructor(private http: HttpClient) {}
 
-  getProducts(): Observable<Product[]> {
-    return this.http.get<Product[]>(this.apiUrlProducts);
+  getProducts(categoriesFilter?: any): Observable<Product[]> {
+    let filter = new HttpParams();
+    if (categoriesFilter) {
+      filter = filter.append('categories', categoriesFilter.join(','));
+    }
+    return this.http.get<Product[]>(this.apiUrlProducts, { params: filter });
   }
   getProductId(productId: string): Observable<Product> {
     return this.http.get<Product>(this.apiUrlProducts + `/${productId}`);

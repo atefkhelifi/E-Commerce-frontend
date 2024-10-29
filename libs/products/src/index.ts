@@ -1,3 +1,4 @@
+export * from './lib/lib.routes';
 export * from './lib/products/products.component';
 export * from './lib/services/categories.service';
 export * from './lib/services/products.service';
