@@ -14,11 +14,14 @@ export class GalleryComponent implements OnInit {
   @Input() images: any[] = [];
 
   ngOnInit(): void {
-    if (this.images.length) {
+    if (this.hasImages) {
       this.selectedImage = this.images[0];
     }
   }
   changeSelectedImage(image: string) {
     this.selectedImage = image;
+  }
+  get hasImages() {
+    return this.images?.length > 0;
   }
 }
