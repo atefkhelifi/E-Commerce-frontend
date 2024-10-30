@@ -4,6 +4,7 @@ import { CartService } from '../../services/cart.service';
 import { OrdersService } from '../../services/orders.service';
 import { CommonModule } from '@angular/common';
 import { ButtonModule } from 'primeng/button';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'users-order-summary',
@@ -18,7 +19,8 @@ export class OrderSummaryComponent implements OnInit, OnDestroy {
 
   constructor(
     private cartService: CartService,
-    private ordersService: OrdersService
+    private ordersService: OrdersService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -44,5 +46,8 @@ export class OrderSummaryComponent implements OnInit, OnDestroy {
         });
       }
     });
+  }
+  navigateToCheckout() {
+    this.router.navigate(['/checkout']);
   }
 }

@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '@env/environment.development';
 import { map, Observable } from 'rxjs';
 import { User } from '../models/user';
+import * as countriesLib from 'i18n-iso-countries';
 
 @Injectable({
   providedIn: 'root',
@@ -31,5 +32,16 @@ export class UsersService {
     return this.http
       .get<number>(`${this.apiUrlUsers}/get/count`)
       .pipe(map((objectValue: any) => objectValue.userCount));
+  }
+
+  getCountries(): { id: string; name: string }[] {
+    return Object.entries(
+      countriesLib.getNames('en', { select: 'official' })
+    ).map((entry) => {
+      return {
+        id: entry[0],
+        name: entry[1],
+      };
+    });
   }
 }

@@ -33,7 +33,7 @@ export class CartService {
       (item) => item.productId === cartItem.productId
     );
     if (existingItem) {
-      cart.items?.map((item) => {
+      cart.items?.map((item: any) => {
         if (item.productId === cartItem.productId) {
           if (updateCareteItem) {
             item.quantity = cartItem.quantity;
