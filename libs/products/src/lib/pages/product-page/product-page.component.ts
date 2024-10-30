@@ -9,6 +9,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { GalleryComponent } from '@frontend/ui';
+import { CartItem, CartService } from '@frontend/orders';
 
 @Component({
   selector: 'lib-product-page',
@@ -27,10 +28,11 @@ import { GalleryComponent } from '@frontend/ui';
 export class ProductPageComponent implements OnInit, OnDestroy {
   product!: Product;
   endSubs$: Subject<any> = new Subject();
-  quantity!: number;
+  quantity = 1;
 
   constructor(
     private prodService: ProductsService,
+    private cartService: CartService,
     private route: ActivatedRoute
   ) {}
   ngOnDestroy(): void {
@@ -55,6 +57,10 @@ export class ProductPageComponent implements OnInit, OnDestroy {
       });
   }
   addToCart() {
-    console.log('test');
+    const cartItem: CartItem = {
+      productId: this.product.id,
+      quantity: this.quantity,
+    };
+    this.cartService.setCartItem(cartItem);
   }
 }

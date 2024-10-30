@@ -1,0 +1,64 @@
+<div class="cart-page">
+  <div class="grid">
+    <div class="col-8">
+      <div>
+        <p-button
+          label="Continue shopping"
+          icon="pi pi-angle-left"
+          (onClick)="backToShop()"
+        >
+        </p-button>
+      </div>
+      <div>
+        <h4>My cart: {{ cartCount }} Item(s)</h4>
+      </div>
+      <div class="cart-shipping mb-5">
+        Shipping after the payment, delivery time: 1 to 4 working dates
+      </div>
+      <div class="cart-item mb-5" *ngFor="let cartItem of cartItemsDetailed">
+        <div class="grid p-fluid">
+          <div class="col-2 cart-item-image">
+            <img
+              [src]="cartItem.product.image"
+              [attr.alt]="cartItem.product.name"
+            />
+          </div>
+          <div class="col-7">
+            <div class="cart-item-name">{{ cartItem.product.name }}</div>
+            <div class="cart-item-price">
+              {{ cartItem.product.price | currency }}
+            </div>
+            <div class="cart-item-remove">
+              <p-button
+                icon="pi pi-trash"
+                (onClick)="removeFromCart(cartItem)"
+              ></p-button>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="field cart-item-quantity">
+              <p-inputNumber
+                [inputId]="cartItem.product.id"
+                mode="decimal"
+                [showButtons]="true"
+                [min]="0"
+                [max]="100"
+                [(ngModel)]="cartItem.quantity"
+                (onInput)="updateCartItemQuantity($event, cartItem)"
+              />
+            </div>
+            <div class="cart-item-subtotal-value">
+              {{
+                (cartItem.product.price ?? 0) * (cartItem?.quantity ?? 0)
+                  | currency
+              }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-4">
+      <users-order-summary></users-order-summary>
+    </div>
+  </div>
+</div>

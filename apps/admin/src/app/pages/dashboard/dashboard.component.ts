@@ -33,7 +33,7 @@ export class DashboardComponent implements OnInit {
       this.userService.getUsersCount(),
       this.ordersService.getTotalSales(),
     ]).subscribe((values) => {
-      console.log(values);
+     // console.log(values);
       this.statistics = values;
     });
   }

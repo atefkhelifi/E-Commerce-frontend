@@ -37,7 +37,6 @@ export class ProductsListComponent implements OnInit, OnDestroy {
   }
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
-      console.log(params);
       params['id'] ? this._getProducts([params['id']]) : this._getProducts();
       params['id']
         ? (this.isCategoryPage = true)
@@ -47,7 +46,6 @@ export class ProductsListComponent implements OnInit, OnDestroy {
     this._getCategories();
   }
   private _getProducts(categoryFilter?: any) {
-    console.log(categoryFilter);
     this.prodService
       .getProducts(categoryFilter)
       .pipe(takeUntil(this.endSubs$))

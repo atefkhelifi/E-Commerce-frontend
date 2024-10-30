@@ -29,7 +29,7 @@
             inputId="quantity"
             mode="decimal"
             [showButtons]="true"
-            [min]="0"
+            [min]="1"
             [max]="100"
           />
         </div>
@@ -48,7 +48,7 @@
           type="button"
           label="Add to cart"
           class="p-button-rounded mr-2"
-          (onClick)="addToCart()"
+          (click)="addToCart()"
         ></button>
       </div>
     </div>

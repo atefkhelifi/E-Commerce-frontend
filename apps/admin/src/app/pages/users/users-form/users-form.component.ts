@@ -174,12 +174,10 @@ export class UsersFormComponent implements OnInit {
   private _checkEditMode() {
     this.router.params.subscribe((params) => {
       if (params['id']) {
-        console.log('here');
         this.editMode = true;
         this.currentUserId = params['id'];
         this.usersService.getUserId(params['id']).subscribe({
           next: (user) => {
-            console.log(user);
             this.form.controls['name'].setValue(user.name);
             this.form.controls['email'].setValue(user.email);
             this.form.controls['password'].setValue(user.password);

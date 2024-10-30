@@ -4,12 +4,14 @@ import { map, Observable } from 'rxjs';
 import { Order } from '../models/order';
 // eslint-disable-next-line @nx/enforce-module-boundaries
 import { environment } from '@env/environment.development';
+import { Product } from '@frontend/products';
 
 @Injectable({
   providedIn: 'root',
 })
 export class OrdersService {
   apiUrlOrders = environment.apiUrl + 'orders';
+  apiUrlProducts = environment.apiUrl + 'products';
   constructor(private http: HttpClient) {}
 
   getOrders(): Observable<Order[]> {
@@ -38,5 +40,9 @@ export class OrdersService {
     return this.http
       .get<number>(`${this.apiUrlOrders}/get/totalsales`)
       .pipe(map((objectValue: any) => objectValue.totalSales));
+  }
+
+  getProduct(productId: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrlProducts}/${productId}`);
   }
 }
