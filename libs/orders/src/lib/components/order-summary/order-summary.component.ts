@@ -4,7 +4,7 @@ import { CartService } from '../../services/cart.service';
 import { OrdersService } from '../../services/orders.service';
 import { CommonModule } from '@angular/common';
 import { ButtonModule } from 'primeng/button';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'users-order-summary',
@@ -16,11 +16,13 @@ import { Router } from '@angular/router';
 export class OrderSummaryComponent implements OnInit, OnDestroy {
   endSubs$: Subject<any> = new Subject();
   totalPrice = 0;
+  showCheckout = true;
 
   constructor(
     private cartService: CartService,
     private ordersService: OrdersService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
@@ -33,6 +35,13 @@ export class OrderSummaryComponent implements OnInit, OnDestroy {
   }
 
   _getOrderSummary() {
+    this.route.url.subscribe((urlSegments) => {
+      // Convert urlSegments to a single string and check for 'checkout'
+      const urlPath = urlSegments.map((segment) => segment.path).join('/');
+      if (urlPath.includes('checkout')) {
+        this.showCheckout = false;
+      }
+    });
     this.cartService.cart$.pipe(takeUntil(this.endSubs$)).subscribe((cart) => {
       this.totalPrice = 0;
       if (cart) {

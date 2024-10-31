@@ -14,6 +14,32 @@ import {
 import { OrderItem } from '../../models/order-item';
 import * as contriesLib from 'i18n-iso-countries';
 import * as en from 'i18n-iso-countries/langs/en.json';
+import { Order } from '../../models/order';
+import { CartService } from '../../services/cart.service';
+import { Cart } from '../../models/cart';
+import { OrdersService } from '../../services/orders.service';
+const ORDER_STATUS: { [key: string]: { label: string; color: string } } = {
+  0: {
+    label: 'Pending',
+    color: 'primary',
+  },
+  1: {
+    label: 'Processed',
+    color: 'warning',
+  },
+  2: {
+    label: 'Shipped',
+    color: 'warning',
+  },
+  3: {
+    label: 'Delivered',
+    color: 'success',
+  },
+  4: {
+    label: 'Failed',
+    color: 'danger',
+  },
+};
 
 @Component({
   selector: 'users-checkout-page',
@@ -30,16 +56,32 @@ import * as en from 'i18n-iso-countries/langs/en.json';
   styleUrl: './checkout-page.component.scss',
 })
 export class CheckoutPageComponent implements OnInit {
-  constructor(private router: Router, private formBuilder: FormBuilder) {}
+  constructor(
+    private router: Router,
+    private formBuilder: FormBuilder,
+    private cartService: CartService,
+    private ordersService: OrdersService
+  ) {}
   form: FormGroup = new FormGroup({});
   isSubmitted = false;
   orderItems: OrderItem[] = [];
-  userId = '';
+  userId = '6709560ca4366416033f3da0';
   countries: any = [];
 
   ngOnInit(): void {
     this._initCheckoutForm();
+    this._getCartItems();
     this._getCountries();
+  }
+  private _getCartItems() {
+    const cart: Cart = this.cartService.getCart();
+    this.orderItems =
+      cart?.items?.map((item) => {
+        return {
+          product: item.productId || {},
+          quantity: item.quantity,
+        };
+      }) || [];
   }
 
   private _initCheckoutForm() {
@@ -77,9 +119,24 @@ export class CheckoutPageComponent implements OnInit {
     if (this.form.invalid) {
       return;
     }
-  }
-
-  get checkoutForm() {
-    return this.form.controls;
+    const order: Order = {
+      orderItems: this.orderItems,
+      shippingAddress1: this.form.controls['street'].value,
+      shippingAddress2: this.form.controls['apartment'].value,
+      city: this.form.controls['city'].value,
+      zip: this.form.controls['zip'].value,
+      country: this.form.controls['country'].value,
+      phone: this.form.controls['phone'].value,
+      status: 0,
+      user: this.userId,
+      dateOrdered: `${Date.now()}`,
+    };
+    console.log(order);
+    this.ordersService.createOrder(order).subscribe({
+      next: () => {
+        this.cartService.emptyCart();
+        this.router.navigate(['/success']);
+      },
+    });
   }
 }

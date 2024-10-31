@@ -4,7 +4,6 @@ import { map, Observable } from 'rxjs';
 import { Order } from '../models/order';
 // eslint-disable-next-line @nx/enforce-module-boundaries
 import { environment } from '@env/environment.development';
-import { Product } from '@frontend/products';
 
 @Injectable({
   providedIn: 'root',
@@ -19,6 +18,10 @@ export class OrdersService {
   }
   getOrder(orderId: string): Observable<Order> {
     return this.http.get<Order>(this.apiUrlOrders + `/${orderId}`);
+  }
+
+  createOrder(order: Order): Observable<Order> {
+    return this.http.post<Order>(this.apiUrlOrders, order);
   }
 
   updateOrder(
