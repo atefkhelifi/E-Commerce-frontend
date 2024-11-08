@@ -10,6 +10,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 // eslint-disable-next-line @nx/enforce-module-boundaries
 import { jwtInterceptor } from '@frontend/users';
+import { provideStore } from '@ngrx/store';
+import { reducers, metaReducers } from './reducers';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -19,5 +21,6 @@ export const appConfig: ApplicationConfig = {
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(appRoutes),
     provideHttpClient(withInterceptors([jwtInterceptor])),
-  ],
+    provideStore(reducers, { metaReducers })
+],
 };

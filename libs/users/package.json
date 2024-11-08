@@ -5,5 +5,8 @@
     "@angular/common": "^18.1.0",
     "@angular/core": "^18.1.0"
   },
-  "sideEffects": false
+  "sideEffects": false,
+  "devDependencies": {
+    "@ngrx/effects": "^18.1.1"
+  }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { OrderSummaryComponent } from '../../components/order-summary/order-summary.component';
 import { CommonModule } from '@angular/common';
 import { ButtonModule } from 'primeng/button';
@@ -18,6 +18,9 @@ import { Order } from '../../models/order';
 import { CartService } from '../../services/cart.service';
 import { Cart } from '../../models/cart';
 import { OrdersService } from '../../services/orders.service';
+// eslint-disable-next-line @nx/enforce-module-boundaries
+import { LocalStorageService, UsersService } from '@frontend/users';
+import { Subject, takeUntil } from 'rxjs';
 const ORDER_STATUS: { [key: string]: { label: string; color: string } } = {
   0: {
     label: 'Pending',
@@ -55,13 +58,20 @@ const ORDER_STATUS: { [key: string]: { label: string; color: string } } = {
   templateUrl: './checkout-page.component.html',
   styleUrl: './checkout-page.component.scss',
 })
-export class CheckoutPageComponent implements OnInit {
+export class CheckoutPageComponent implements OnInit, OnDestroy {
+  unsubscribe$: Subject<any> = new Subject();
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
     private cartService: CartService,
-    private ordersService: OrdersService
+    private ordersService: OrdersService,
+    private us: UsersService,
+    private localStorage: LocalStorageService
   ) {}
+  ngOnDestroy(): void {
+    this.unsubscribe$.next(null);
+    this.unsubscribe$.complete();
+  }
   form: FormGroup = new FormGroup({});
   isSubmitted = false;
   orderItems: OrderItem[] = [];
@@ -70,6 +80,7 @@ export class CheckoutPageComponent implements OnInit {
 
   ngOnInit(): void {
     this._initCheckoutForm();
+    this._autoFillUserData();
     this._getCartItems();
     this._getCountries();
   }
@@ -82,6 +93,26 @@ export class CheckoutPageComponent implements OnInit {
           quantity: item.quantity,
         };
       }) || [];
+  }
+  private _autoFillUserData() {
+    this.userId = this.localStorage.getUserIdFromToken() || '';
+    console.log(this.userId);
+
+    this.us.getUserId(this.userId).subscribe((user: any) => {
+      console.log(user);
+      if (user) {
+        this.form.patchValue({
+          name: user.name,
+          email: user.email,
+          phone: user.phone,
+          city: user.city,
+          country: user.country,
+          zip: user.zip,
+          apartment: user.apartment,
+          street: user.street,
+        });
+      }
+    });
   }
 
   private _initCheckoutForm() {
