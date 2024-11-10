@@ -150,6 +150,7 @@ export class CheckoutPageComponent implements OnInit, OnDestroy {
     if (this.form.invalid) {
       return;
     }
+
     const order: Order = {
       orderItems: this.orderItems,
       shippingAddress1: this.form.controls['street'].value,
@@ -162,12 +163,14 @@ export class CheckoutPageComponent implements OnInit, OnDestroy {
       user: this.userId,
       dateOrdered: `${Date.now()}`,
     };
-    console.log(order);
-    this.ordersService.createOrder(order).subscribe({
-      next: () => {
-        this.cartService.emptyCart();
-        this.router.navigate(['/success']);
-      },
-    });
+    this.ordersService.cacheOrderData(order);
+
+    this.ordersService
+      .createCheckoutSession(this.orderItems)
+      .subscribe((error) => {
+        if (error) {
+          console.log('error in redirecting to payment');
+        }
+      });
   }
 }

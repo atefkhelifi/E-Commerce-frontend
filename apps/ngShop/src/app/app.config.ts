@@ -12,6 +12,7 @@ import { provideStore } from '@ngrx/store';
 import { provideEffects } from '@ngrx/effects';
 // eslint-disable-next-line @nx/enforce-module-boundaries
 import { jwtInterceptor, UsersService } from '@frontend/users';
+import { NgxStripeModule } from 'ngx-stripe';
 // eslint-disable-next-line @nx/enforce-module-boundaries
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -22,5 +23,10 @@ export const appConfig: ApplicationConfig = {
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(appRoutes),
     provideHttpClient(withInterceptors([jwtInterceptor])),
+    importProvidersFrom(
+      NgxStripeModule.forRoot(
+        'pk_test_51QJG76FCczDn7rhWb4lgFqY1RnPSNeRKGSUE4niCbtcM9fiBjS7o9bXghGuAIrBOWEo75GaNi7dLtrndnaweEivX00fPzEuGdf'
+      )
+    ),
   ],
 };

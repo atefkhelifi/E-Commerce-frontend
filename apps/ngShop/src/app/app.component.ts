@@ -7,7 +7,7 @@ import { HeaderComponent } from './shared/header/header.component';
 import { BannerComponent } from '@frontend/ui';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-// eslint-disable-next-line @nx/enforce-module-boundaries
+
 @Component({
   standalone: true,
   imports: [

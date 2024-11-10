@@ -12,6 +12,7 @@ import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { jwtInterceptor } from '@frontend/users';
 import { provideStore } from '@ngrx/store';
 import { reducers, metaReducers } from './reducers';
+import { NgxStripeModule } from 'ngx-stripe';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -21,6 +22,11 @@ export const appConfig: ApplicationConfig = {
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(appRoutes),
     provideHttpClient(withInterceptors([jwtInterceptor])),
-    provideStore(reducers, { metaReducers })
-],
+    provideStore(reducers, { metaReducers }),
+    importProvidersFrom(
+      NgxStripeModule.forRoot(
+        'pk_test_51QJG76FCczDn7rhWb4lgFqY1RnPSNeRKGSUE4niCbtcM9fiBjS7o9bXghGuAIrBOWEo75GaNi7dLtrndnaweEivX00fPzEuGdf'
+      )
+    ),
+  ],
 };
