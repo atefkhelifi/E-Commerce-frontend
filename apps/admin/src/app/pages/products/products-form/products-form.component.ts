@@ -12,11 +12,7 @@ import {
 } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 // eslint-disable-next-line @nx/enforce-module-boundaries
-import {
-  Product,
-  ProductsService,
-  CategoriesService,
-} from '@frontend/products';
+import { ProductsService, CategoriesService } from '@frontend/products';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { timer } from 'rxjs';

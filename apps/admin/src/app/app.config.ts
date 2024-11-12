@@ -3,15 +3,13 @@ import {
   importProvidersFrom,
   provideZoneChangeDetection,
 } from '@angular/core';
-import { provideRouter, withHashLocation } from '@angular/router';
+import { provideRouter } from '@angular/router';
 import { appRoutes } from './app.routes';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 // eslint-disable-next-line @nx/enforce-module-boundaries
 import { jwtInterceptor } from '@frontend/users';
-import { provideStore } from '@ngrx/store';
-import { reducers, metaReducers } from './reducers';
 import { NgxStripeModule } from 'ngx-stripe';
 
 export const appConfig: ApplicationConfig = {
@@ -22,7 +20,7 @@ export const appConfig: ApplicationConfig = {
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(appRoutes),
     provideHttpClient(withInterceptors([jwtInterceptor])),
-    provideStore(reducers, { metaReducers }),
+
     importProvidersFrom(
       NgxStripeModule.forRoot(
         'pk_test_51QJG76FCczDn7rhWb4lgFqY1RnPSNeRKGSUE4niCbtcM9fiBjS7o9bXghGuAIrBOWEo75GaNi7dLtrndnaweEivX00fPzEuGdf'

@@ -20,14 +20,18 @@ export class AuthGuard implements CanActivate {
 
     if (token) {
       const tokenDecode = JSON.parse(atob(token.split('.')[1]));
-      if (tokenDecode.isAdmin && this._isTokenExpired(tokenDecode.exp)) {
+      if (tokenDecode.isAdmin && !this._isTokenExpired(tokenDecode.exp)) {
         return true;
       }
+
+      this.router.navigate(['/login']);
+      return false;
     }
+
     this.router.navigate(['/login']);
     return false;
   }
   private _isTokenExpired(exp: number): boolean {
-    return Math.floor(new Date().getTime()) >= exp;
+    return Math.floor(new Date().getTime() / 1000) >= exp;
   }
 }

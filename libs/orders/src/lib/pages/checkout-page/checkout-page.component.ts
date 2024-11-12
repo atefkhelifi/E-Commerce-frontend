@@ -20,7 +20,7 @@ import { Cart } from '../../models/cart';
 import { OrdersService } from '../../services/orders.service';
 // eslint-disable-next-line @nx/enforce-module-boundaries
 import { LocalStorageService, UsersService } from '@frontend/users';
-import { Subject, takeUntil } from 'rxjs';
+import { Subject } from 'rxjs';
 const ORDER_STATUS: { [key: string]: { label: string; color: string } } = {
   0: {
     label: 'Pending',

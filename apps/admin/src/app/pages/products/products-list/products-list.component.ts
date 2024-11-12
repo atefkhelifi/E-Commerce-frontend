@@ -4,7 +4,7 @@ import { ToolbarModule } from 'primeng/toolbar';
 import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
 // eslint-disable-next-line @nx/enforce-module-boundaries
-import { ProductsService, Product } from '@frontend/products';
+import { ProductsService } from '@frontend/products';
 import { Router, RouterLink } from '@angular/router';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { CommonModule } from '@angular/common';

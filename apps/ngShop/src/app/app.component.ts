@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { RouterModule, RouterOutlet } from '@angular/router';
+import { Component } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
 import { NxWelcomeComponent } from './nx-welcome.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { FooterComponent } from './shared/footer/footer.component';
@@ -20,7 +20,7 @@ import { EffectsModule } from '@ngrx/effects';
     HeaderComponent,
     BannerComponent,
   ],
-  providers: [],
+
   selector: 'ngshop-root',
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',

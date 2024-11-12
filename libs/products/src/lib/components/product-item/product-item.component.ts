@@ -1,8 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Product } from '../../models/product';
 import { ButtonModule } from 'primeng/button';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
+// eslint-disable-next-line @nx/enforce-module-boundaries
 import { CartItem, CartService } from '@frontend/orders';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';

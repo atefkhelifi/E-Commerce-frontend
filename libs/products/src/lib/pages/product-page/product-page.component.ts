@@ -9,6 +9,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { GalleryComponent } from '@frontend/ui';
+// eslint-disable-next-line @nx/enforce-module-boundaries
 import { CartItem, CartService } from '@frontend/orders';
 
 @Component({

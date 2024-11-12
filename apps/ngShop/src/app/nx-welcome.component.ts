@@ -1,7 +1,7 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 
 @Component({
-  selector: 'app-nx-welcome',
+  selector: 'ngshop-nx-welcome',
   standalone: true,
   imports: [],
   template: `

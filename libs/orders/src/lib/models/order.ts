@@ -1,6 +1,5 @@
 import { OrderItem } from './order-item';
 // eslint-disable-next-line @nx/enforce-module-boundaries
-import { User } from '../../../../users/src/lib/models/user';
 
 export class Order {
   id?: string;
