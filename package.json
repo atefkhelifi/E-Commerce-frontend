@@ -3,7 +3,9 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "lint": "nx run-many --target=lint --all"
+    "lint": "nx run-many --target=lint --all",
+    "build-prod-admin": "nx build admin --prod --output-path ../admin --base-href /admin/",
+    "build-prod-ngShop": "nx build ngShop --prod --output-path ../ngShop --base-href /ngShop/"
   },
   "private": true,
   "dependencies": {
